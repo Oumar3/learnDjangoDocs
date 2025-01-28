@@ -124,8 +124,32 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",  # là où Webpack place ses fichiers
 ]
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.s3.S3Storage",
+    },
+    "staticfiles": {
+        "BACKEND": "storages.backends.s3.S3Storage",  # Stockage des fichiers statiques
+    },
+}
+
+DEFAULT_FILE_STORAGE = "storages.backends.s3.S3Storage"
+
+from decouple import config
+
+AWS_STORAGE_BUCKET_NAME=config("AWS_STORAGE_BUCKET_NAME")
+AWS_S3_REGION_NAME=config("AWS_S3_REGION_NAME")
+AWS_S3_ACCESS_KEY_ID=config("AWS_S3_ACCESS_KEY_ID")
+AWS_S3_SECRET_ACCESS_KEY=config("AWS_S3_SECRET_ACCESS_KEY")
+
+#STATICFILES_STORAGE = "storages.backends.s3.S3Storage"
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

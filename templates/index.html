@@ -13,9 +13,14 @@
        
         {% for blog in blogs %}
         <li>
-            <img src="{{blog.img.url}}" alt=""><br>
+            {% if blog.img %}
+                <img src="{{ blog.img.url }}" alt="">
+            {% else %}
+                <img src="{% static 'default-image.jpg' %}" alt="">
+            {% endif %}
             <a href="">{{blog.name}}</a>
         </li>
+        <a href="{% url "deleteblog" blog.id %}">delete</a>
         {% endfor %}
     </ul>
     <script src="{% static 'bundle.js' %}"></script>

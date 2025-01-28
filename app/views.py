@@ -18,3 +18,8 @@ def addblog(request):
     else:
         form = BlogForm()
         return render(request,'addblog.html',{'form':form})
+    
+def deleteblog(request,id):
+    b = blog.objects.get(id=id)
+    b.delete()
+    return redirect('index')

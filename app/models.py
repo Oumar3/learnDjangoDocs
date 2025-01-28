@@ -21,10 +21,9 @@ class blog(models.Model):
 
     def __str__(self):
         return self.name
-    def delete(self, using = ..., keep_parents = ...):
-        if self.img.delete:
-            self.img.delete()
-        return super().delete(using, keep_parents)
+    def delete(self):
+      self.img.delete()
+      super().delete()
 
 class Product(models.Model):
     objects = ProductManager()
